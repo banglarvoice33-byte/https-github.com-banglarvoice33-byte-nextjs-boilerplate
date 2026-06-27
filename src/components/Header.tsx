@@ -57,13 +57,18 @@ export default function Header() {
           {/* Logo */}
           <a href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-lg bg-[#2E4CB2] flex items-center justify-center">
-              <span className="text-white font-headline font-bold text-lg">ভ</span>
+              <span className="text-white font-bold text-sm tracking-wide">𝔹𝕍</span>
             </div>
             <div className="hidden sm:block">
               <h1 className="font-headline font-bold text-xl text-[#2E4CB2] leading-tight">BANGLAR VOICE</h1>
               <p className="text-[10px] text-muted-foreground tracking-wider uppercase">বাংলার ভয়েস — banglarvoice24news.com</p>
             </div>
           </a>
+
+          {/* Center brand text */}
+          <div className="hidden lg:flex items-center">
+            <span className="font-bold tracking-wide text-lg text-[#2E4CB2]">BANGLAR VOICE</span>
+          </div>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">

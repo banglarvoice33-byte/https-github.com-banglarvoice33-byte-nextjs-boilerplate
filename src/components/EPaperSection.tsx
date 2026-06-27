@@ -35,7 +35,7 @@ export default function EPaperSection() {
               <div className="p-6 flex flex-col justify-center">
                 <span className="text-xs font-semibold text-[#1BA1E2] mb-2">আজকের সংস্করণ</span>
                 <h3 className="font-headline text-xl font-bold text-foreground mb-3 leading-snug">
-                  বাংলার পালস — ই-পেপার
+                  বাংলার ভয়েস — ই-পেপার
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   প্রতিদিন সকাল ৭টায় প্রকাশিত হয়। আজকের ১২ পৃষ্ঠার ই-পেপারে পড়ুন জাতীয়, রাজনৈতিক, অর্থনৈতিক ও আন্তর্জাতিক সংবাদ।

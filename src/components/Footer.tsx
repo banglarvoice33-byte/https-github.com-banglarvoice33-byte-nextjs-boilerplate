@@ -71,7 +71,7 @@ export default function Footer() {
           <div className="flex items-center justify-center gap-6">
             <div className="text-center">
               <p className="text-xs text-white/40 uppercase tracking-wider mb-1">CEO</p>
-              <p className="font-kalpurush text-lg text-white/90 tracking-wide" style={{ fontFamily: "'Kalpurush', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif", fontWeight: 400 }}>
+              <p className="font-script text-2xl text-white/90 tracking-wide">
                 MD DULAL HOSSAIN SARDER
               </p>
             </div>

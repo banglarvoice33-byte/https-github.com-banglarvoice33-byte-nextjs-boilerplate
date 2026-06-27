@@ -51,6 +51,7 @@ export default {
         kalpurush: ['"Kalpurush"', '"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
         headline: ['"Kalpurush"', '"Hind Siliguri"', '"Noto Sans Bengali"', 'serif'],
         body: ['"Kalpurush"', '"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
+        script: ['"Great Vibes"', 'cursive'],
       },
     },
   },

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Clock, Eye, ArrowRight, TrendingUp, GraduationCap, BookOpen } from 'lucide-react'
+import { Clock, Eye, ArrowRight, TrendingUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const heroSlides = [
@@ -129,37 +129,8 @@ export default function HeroSection() {
             <div className="invisible pt-[56.25%] lg:pt-[48%]" />
           </div>
 
-          {/* Banglar Voice Learning Hub banner */}
+          {/* Side articles */}
           <div className="flex flex-col gap-4">
-            <a href="/learning-hub" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#2E4CB2] to-[#1BA1E2] shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")` }} />
-              <div className="relative p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                    <GraduationCap className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-semibold text-white/80 uppercase tracking-wider">Banglar Voice Learning Hub</span>
-                  </div>
-                </div>
-                <h3 className="font-headline text-lg font-bold text-white leading-snug mb-2">
-                  বাংলার ভয়েস লার্নিং হাব
-                </h3>
-                <p className="text-sm text-white/80 leading-relaxed mb-4">
-                  একজন শিক্ষার্থীর জন্য একজন শিক্ষক। ব্যক্তিগত শিক্ষক, লাইভ ক্লাস, পরীক্ষার প্রস্তুতি, দক্ষতা উন্নয়ন এবং অনলাইন পরামর্শ।
-                </p>
-                <div className="flex flex-col gap-2">
-                  <span className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white text-[#2E4CB2] font-semibold text-sm hover:bg-white/90 transition-colors">
-                    <BookOpen className="w-4 h-4" /> এখনই শিক্ষক খুঁজুন
-                  </span>
-                  <span className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-white/40 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
-                    <GraduationCap className="w-4 h-4" /> লার্নিং হাবে প্রবেশ করুন
-                  </span>
-                </div>
-              </div>
-            </a>
-
-            {/* Side articles */}
             {heroSlides.map((slide, i) => (
               <button
                 key={i}
