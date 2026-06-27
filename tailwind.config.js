@@ -48,8 +48,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        headline: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'serif'],
-        body: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
+        kalpurush: ['"Kalpurush"', '"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
+        headline: ['"Kalpurush"', '"Hind Siliguri"', '"Noto Sans Bengali"', 'serif'],
+        body: ['"Kalpurush"', '"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
       },
     },
   },

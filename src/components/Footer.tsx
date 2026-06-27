@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Youtube, Instagram, Send, Mail, Phone, MapPin, Rss, ArrowUp } from 'lucide-react'
+import { Facebook, Twitter, Youtube, Instagram, Send, Mail, Phone, MapPin, Rss, ArrowUp, Linkedin } from 'lucide-react'
 
 const footerLinks = {
   categories: [
@@ -6,12 +6,12 @@ const footerLinks = {
     { label: 'রাজনীতি', href: '/politics' },
     { label: 'অর্থনীতি', href: '/economy' },
     { label: 'আন্তর্জাতিক', href: '/international' },
-    { label: 'খেলা', href: '/sports' },
+    { label: 'খেলাধুলা', href: '/sports' },
     { label: 'প্রযুক্তি', href: '/tech' },
   ],
   services: [
     { label: 'ই-পেপার', href: '/e-paper' },
-    { label: 'শিক্ষার্থী লার্নিং হাব', href: '/learning-hub' },
+    { label: 'বাংলার ভয়েস লার্নিং হাব', href: '/learning-hub' },
     { label: 'ব্রেকিং নিউজ', href: '/breaking' },
     { label: 'নিউজলেটার', href: '/newsletter' },
     { label: 'আর্কাইভ', href: '/archive' },
@@ -22,6 +22,9 @@ const footerLinks = {
     { label: 'বিজ্ঞাপন', href: '/advertise' },
     { label: 'যোগাযোগ', href: '/contact' },
     { label: 'ক্যারিয়ার', href: '/careers' },
+  ],
+  ecosystem: [
+    { label: 'ইকোসিস্টেম', href: '/ecosystem', adminOnly: true },
   ],
 }
 
@@ -62,6 +65,28 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* CEO Section */}
+      <div className="border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex items-center justify-center gap-6">
+            <div className="text-center">
+              <p className="text-xs text-white/40 uppercase tracking-wider mb-1">CEO</p>
+              <p className="font-kalpurush text-lg text-white/90 tracking-wide" style={{ fontFamily: "'Kalpurush', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif", fontWeight: 400 }}>
+                MD DULAL HOSSAIN SARDER
+              </p>
+            </div>
+            <div className="hidden sm:flex items-center gap-3">
+              <a href="#" className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="X (Twitter)">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="LinkedIn">
+                <Linkedin className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -69,9 +94,12 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#2E4CB2] flex items-center justify-center">
-                <span className="font-headline font-bold text-lg">ব</span>
+                <span className="font-headline font-bold text-lg">ভ</span>
               </div>
-              <h2 className="font-headline text-xl font-bold">বাংলার পালস</h2>
+              <div>
+                <h2 className="font-headline text-xl font-bold">BANGLAR VOICE</h2>
+                <p className="text-xs text-white/60">বাংলার ভয়েস</p>
+              </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-sm">
               বাংলাদেশের সবচেয়ে নির্ভরযোগ্য সংবাদ পortal। আমরা সঠিক, নিরপেক্ষ ও সময়োপযোগী সংবাদ প্রকাশে প্রতিশ্রুতিবদ্ধ।
@@ -87,7 +115,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#1BA1E2]" />
-                <span>info@banglarpulse.com</span>
+                <span>banglarvoice33@gmail.com</span>
               </div>
             </div>
           </div>
@@ -120,7 +148,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Company + Ecosystem */}
           <div>
             <h4 className="font-headline text-sm font-bold mb-4 text-white/80">কোম্পানি</h4>
             <ul className="space-y-2.5">
@@ -132,6 +160,11 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <a href="/ecosystem" className="text-sm text-[#1BA1E2]/60 hover:text-[#1BA1E2] transition-colors">
+                ইকোসিস্টেম (অ্যাডমিন)
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -140,13 +173,13 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40 text-center sm:text-left">
-            © ২০২৬ বাংলার পালস। সর্বস্বত্ব সংরক্ষিত।
+            © ২০২৬ BANGLAR VOICE – বাংলার ভয়েস। সর্বস্বত্ব সংরক্ষিত।
           </p>
           <div className="flex items-center gap-3">
             <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="Facebook">
               <Facebook className="w-4 h-4" />
             </a>
-            <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="Twitter">
+            <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="X (Twitter)">
               <Twitter className="w-4 h-4" />
             </a>
             <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="Youtube">
@@ -157,6 +190,9 @@ export default function Footer() {
             </a>
             <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="Telegram">
               <Send className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="LinkedIn">
+              <Linkedin className="w-4 h-4" />
             </a>
             <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="RSS">
               <Rss className="w-4 h-4" />

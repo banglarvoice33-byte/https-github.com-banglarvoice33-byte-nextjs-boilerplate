@@ -103,8 +103,11 @@ export default function StudentLearningHub() {
                     <span className="text-xs font-semibold text-[#1BA1E2] uppercase tracking-wider">নতুন সেবা</span>
                   </div>
                   <h2 className="font-headline text-2xl md:text-3xl lg:text-4xl font-bold text-[#2E4CB2] leading-tight">
-                    শিক্ষার্থী লার্নিং হাব
+                    বাংলার ভয়েস লার্নিং হাব
                   </h2>
+                  <p className="text-xs font-medium text-[#1BA1E2] mt-1">
+                    Banglar Voice Learning Hub
+                  </p>
                   <p className="text-sm md:text-base text-muted-foreground mt-1 font-medium">
                     একজন শিক্ষার্থীর জন্য একজন শিক্ষক
                   </p>

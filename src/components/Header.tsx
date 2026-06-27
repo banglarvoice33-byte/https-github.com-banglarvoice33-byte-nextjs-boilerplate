@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, Search, Bell, Bookmark, ChevronDown } from 'lucide-react'
+import LoginButton from '@/components/LoginButton'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -8,11 +9,12 @@ const navLinks = [
   { label: 'রাজনীতি', href: '/politics' },
   { label: 'অর্থনীতি', href: '/economy' },
   { label: 'আন্তর্জাতিক', href: '/international' },
-  { label: 'খেলা', href: '/sports' },
+  { label: 'খেলাধুলা', href: '/sports' },
   { label: 'বিনোদন', href: '/entertainment' },
   { label: 'প্রযুক্তি', href: '/tech' },
   { label: 'শিক্ষা', href: '/education' },
   { label: 'স্বাস্থ্য', href: '/health' },
+  { label: 'সম্পাদকীয়', href: '/editorial' },
 ]
 
 export default function Header() {
@@ -39,7 +41,7 @@ export default function Header() {
             <span className="text-accent font-medium">ব্রেকিং নিউজ</span>
           </div>
           <div className="flex items-center gap-3">
-            <button className="hover:text-accent transition-colors">লগ ইন</button>
+            <LoginButton />
             <span className="opacity-40">|</span>
             <button className="hover:text-accent transition-colors">সাবস্ক্রাইব</button>
           </div>
@@ -55,17 +57,17 @@ export default function Header() {
           {/* Logo */}
           <a href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-lg bg-[#2E4CB2] flex items-center justify-center">
-              <span className="text-white font-headline font-bold text-lg">ব</span>
+              <span className="text-white font-headline font-bold text-lg">ভ</span>
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-headline font-bold text-xl text-[#2E4CB2] leading-tight">বাংলার পালস</h1>
-              <p className="text-[10px] text-muted-foreground tracking-wider uppercase">Bangladesh News Portal</p>
+              <h1 className="font-headline font-bold text-xl text-[#2E4CB2] leading-tight">BANGLAR VOICE</h1>
+              <p className="text-[10px] text-muted-foreground tracking-wider uppercase">বাংলার ভয়েস — banglarvoice24news.com</p>
             </div>
           </a>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.slice(0, 7).map((link) => (
+            {navLinks.slice(0, 6).map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -79,7 +81,7 @@ export default function Header() {
                 আরও <ChevronDown className="w-3 h-3" />
               </button>
               <div className="absolute top-full right-0 bg-white shadow-lg rounded-lg border border-border p-2 min-w-[160px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                {navLinks.slice(7).map((link) => (
+                {navLinks.slice(6).map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
