@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import EcosystemPage from './pages/EcosystemPage'
 import ForbiddenPage from './pages/ForbiddenPage'
+import MissionVisionPage from './pages/MissionVisionPage'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route path="/staff/login" element={<LoginPage />} />
             <Route path="/ecosystem" element={<EcosystemPage />} />
             <Route path="/403" element={<ForbiddenPage />} />
+            <Route path="/about" element={<MissionVisionPage />} />
+            <Route path="/mission" element={<MissionVisionPage />} />
           </Routes>
         </main>
         <Footer />

@@ -15,6 +15,7 @@ const navLinks = [
   { label: 'শিক্ষা', href: '/education' },
   { label: 'স্বাস্থ্য', href: '/health' },
   { label: 'সম্পাদকীয়', href: '/editorial' },
+  { label: 'আমাদের সম্পর্কে', href: '/about' },
 ]
 
 export default function Header() {
