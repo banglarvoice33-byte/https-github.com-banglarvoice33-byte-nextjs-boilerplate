@@ -4,7 +4,7 @@ import SportsSection from '@/components/SportsSection'
 import EntertainmentSection from '@/components/EntertainmentSection'
 import EditorialSection from '@/components/EditorialSection'
 import EPaperSection from '@/components/EPaperSection'
-import { LearningHubSidebar, TrendingWidget, PopularNewsWidget, AdsWidget } from '@/components/sidebar'
+import { Sidebar } from '@/components/sidebar'
 
 export default function HomePage() {
   return (
@@ -23,11 +23,8 @@ export default function HomePage() {
           </div>
 
           {/* Right column: Sidebar */}
-          <div className="md:col-span-1 space-y-6">
-            <LearningHubSidebar />
-            <TrendingWidget />
-            <PopularNewsWidget />
-            <AdsWidget />
+          <div className="md:col-span-1">
+            <Sidebar />
           </div>
         </div>
       </div>

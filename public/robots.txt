@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://banglarvoice.com/functions/v1/sitemap
+
+# Disallow admin-only routes
+Disallow: /ecosystem
+Disallow: /staff/login
+Disallow: /login
+Disallow: /api/
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Common social media bots
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /

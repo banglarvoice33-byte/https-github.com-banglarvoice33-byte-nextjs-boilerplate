@@ -25,6 +25,7 @@ interface AuthContextType {
   isSuperAdmin: boolean
   canAccessEcosystem: boolean
   signIn: (email: string, password: string) => Promise<{ error: any }>
+  signInWithOAuth: () => Promise<{ error: any }>
   signOut: () => Promise<void>
 }
 
@@ -36,6 +37,7 @@ const AuthContext = createContext<AuthContextType>({
   isSuperAdmin: false,
   canAccessEcosystem: false,
   signIn: async () => ({ error: null }),
+  signInWithOAuth: async () => ({ error: null }),
   signOut: async () => {},
 })
 
@@ -76,6 +78,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .maybeSingle()
     if (data) {
       setStaff(data as StaffMember)
+    } else {
+      setStaff(null)
     }
   }
 
@@ -88,13 +92,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error }
   }
 
+  const signInWithOAuth = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+    return { error }
+  }
+
   const signOut = async () => {
-    await supabase.auth.signOut()
     setStaff(null)
+    setUser(null)
+    await supabase.auth.signOut()
   }
 
   return (
-    <AuthContext.Provider value={{ user, staff, isLoading, isAdmin, isSuperAdmin, canAccessEcosystem, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, staff, isLoading, isAdmin, isSuperAdmin, canAccessEcosystem, signIn, signInWithOAuth, signOut }}>
       {children}
     </AuthContext.Provider>
   )

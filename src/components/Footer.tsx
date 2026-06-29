@@ -1,4 +1,6 @@
-import { Facebook, Twitter, Youtube, Instagram, Send, Mail, Phone, MapPin, Rss, ArrowUp, Linkedin } from 'lucide-react'
+import { Facebook, Twitter, Youtube, Instagram, Send, Mail, Phone, MapPin, Rss, ArrowUp, Linkedin, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react'
+import { useState } from 'react'
+import { supabase } from '@/lib/supabase'
 
 const footerLinks = {
   categories: [
@@ -23,9 +25,97 @@ const footerLinks = {
     { label: 'যোগাযোগ', href: '/contact' },
     { label: 'ক্যারিয়ার', href: '/careers' },
   ],
-  ecosystem: [
-    { label: 'ইকোসিস্টেম', href: '/ecosystem', adminOnly: true },
-  ],
+}
+
+function NewsletterForm() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email.trim()) return
+    setStatus('loading')
+
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert({ email: email.trim().toLowerCase(), name: '', source: 'website_footer' })
+
+      if (error) {
+        if (error.message?.includes('duplicate')) {
+          setStatus('error')
+          setMessage('এই ইমেইলটি ইতিমধ্যে সাবস্ক্রাইব করা আছে')
+        } else {
+          setStatus('error')
+          setMessage('সাবস্ক্রাইব করতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন')
+        }
+        return
+      }
+
+      setStatus('success')
+      setMessage('সফলভাবে সাবস্ক্রাইব হয়েছে!')
+      setEmail('')
+    } catch {
+      setStatus('error')
+      setMessage('সাবস্ক্রাইব করতে সমস্যা হয়েছে')
+    }
+  }
+
+  return (
+    <div className="bg-gradient-to-br from-[#2E4CB2] to-[#1BA1E2] rounded-xl p-5 md:p-6">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+          <Rss className="w-5 h-5 text-white" />
+        </div>
+        <div>
+          <h3 className="font-headline text-lg font-bold text-white leading-tight">নিউজলেটার</h3>
+          <p className="text-xs text-white/80 leading-relaxed">প্রতিদিন সকাল ৭টায় সরাসরি আপনার ইনবক্সে</p>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+        <div className="relative flex-1">
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#2E4CB2]" />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="আপনার ইমেইল ঠিকানা"
+            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50"
+            disabled={status === 'loading'}
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="px-4 py-2.5 rounded-lg bg-[#1BA1E2] text-white text-sm font-semibold hover:bg-[#1890c9] transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap disabled:opacity-60"
+        >
+          {status === 'loading' ? (
+            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          ) : (
+            <>
+              <Send className="w-4 h-4" /> সাবস্ক্রাইব
+            </>
+          )}
+        </button>
+      </form>
+      {status === 'success' && (
+        <div className="mt-2 flex items-center gap-1.5 text-sm text-white/90">
+          <CheckCircle className="w-4 h-4 text-white" />
+          {message}
+        </div>
+      )}
+      {status === 'error' && (
+        <div className="mt-2 flex items-center gap-1.5 text-sm text-white/90">
+          <AlertCircle className="w-4 h-4 text-white" />
+          {message}
+        </div>
+      )}
+      <p className="text-xs text-white/70 mt-2">
+        সাবস্ক্রাইব করলে আপনি আমাদের <a href="/privacy" className="underline hover:text-white">গোপনীয়তা নীতি</a> মেনে চলছেন বলে গণ্য হবে।
+      </p>
+    </div>
+  )
 }
 
 export default function Footer() {
@@ -37,45 +127,22 @@ export default function Footer() {
     <footer className="bg-[#1a1f3c] text-white">
       {/* Newsletter bar */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#2E4CB2] flex items-center justify-center">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-headline text-lg font-bold">দৈনিক নিউজলেটার</h3>
-                <p className="text-sm text-white/60">সকালের সেরা সংবাদ আপনার ইনবক্সে</p>
-              </div>
-            </div>
-            <form className="flex w-full md:w-auto gap-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="আপনার ইমেইল ঠিকানা"
-                className="flex-1 md:w-72 px-4 py-2.5 rounded-lg bg-white/10 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#1BA1E2] text-sm"
-              />
-              <button
-                type="submit"
-                className="px-5 py-2.5 rounded-lg bg-[#1BA1E2] text-white font-semibold text-sm hover:bg-[#1890c9] transition-colors whitespace-nowrap"
-              >
-                সাবস্ক্রাইব
-              </button>
-            </form>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+          <NewsletterForm />
         </div>
       </div>
 
       {/* CEO Section */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-center gap-6">
+        <div className="max-w-7xl mx-auto px-4 py-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <div className="text-center">
-              <p className="text-xs text-white/40 uppercase tracking-wider mb-1">CEO</p>
-              <p className="font-script text-2xl text-white/90 tracking-wide">
+              <p className="text-[10px] font-semibold text-white/40 uppercase tracking-[0.2em] mb-1">Founder & CEO</p>
+              <p className="font-script text-2xl sm:text-3xl text-white/90 tracking-wide">
                 MD DULAL HOSSAIN SARDER
               </p>
             </div>
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <a href="#" className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="X (Twitter)">
                 <Twitter className="w-4 h-4" />
               </a>
@@ -88,33 +155,33 @@ export default function Footer() {
       </div>
 
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-[#2E4CB2] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-[#2E4CB2] flex items-center justify-center shrink-0">
                 <span className="font-headline font-bold text-lg">ভ</span>
               </div>
               <div>
-                <h2 className="font-headline text-xl font-bold">BANGLAR VOICE</h2>
+                <h2 className="font-headline text-xl font-bold leading-tight">BANGLAR VOICE</h2>
                 <p className="text-xs text-white/60">বাংলার ভয়েস</p>
               </div>
             </div>
-            <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-sm">
+            <p className="text-sm text-white/60 leading-relaxed mb-5 max-w-sm">
               বাংলাদেশের সবচেয়ে নির্ভরযোগ্য সংবাদ পortal। আমরা সঠিক, নিরপেক্ষ ও সময়োপযোগী সংবাদ প্রকাশে প্রতিশ্রুতিবদ্ধ।
             </p>
             <div className="space-y-2 text-sm text-white/60">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#1BA1E2]" />
+                <MapPin className="w-4 h-4 text-[#1BA1E2] shrink-0" />
                 <span>১২৩ প্রগতি সরণি, ঢাকা ১২১২</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#1BA1E2]" />
+                <Phone className="w-4 h-4 text-[#1BA1E2] shrink-0" />
                 <span>+৮৮০ ১৭১২-৩৪৫৬৭৮</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#1BA1E2]" />
+                <Mail className="w-4 h-4 text-[#1BA1E2] shrink-0" />
                 <span>banglarvoice33@gmail.com</span>
               </div>
             </div>
@@ -122,11 +189,11 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h4 className="font-headline text-sm font-bold mb-4 text-white/80">বিভাগ</h4>
+            <h4 className="font-headline text-sm font-bold mb-4 text-white/80 tracking-wide">বিভাগ</h4>
             <ul className="space-y-2.5">
               {footerLinks.categories.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-white/60 hover:text-[#1BA1E2] transition-colors">
+                  <a href={link.href} className="text-sm text-white/60 hover:text-[#1BA1E2] transition-colors leading-relaxed">
                     {link.label}
                   </a>
                 </li>
@@ -136,11 +203,11 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-headline text-sm font-bold mb-4 text-white/80">সেবা</h4>
+            <h4 className="font-headline text-sm font-bold mb-4 text-white/80 tracking-wide">সেবা</h4>
             <ul className="space-y-2.5">
               {footerLinks.services.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-white/60 hover:text-[#1BA1E2] transition-colors">
+                  <a href={link.href} className="text-sm text-white/60 hover:text-[#1BA1E2] transition-colors leading-relaxed">
                     {link.label}
                   </a>
                 </li>
@@ -148,13 +215,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company + Ecosystem */}
+          {/* Company */}
           <div>
-            <h4 className="font-headline text-sm font-bold mb-4 text-white/80">কোম্পানি</h4>
+            <h4 className="font-headline text-sm font-bold mb-4 text-white/80 tracking-wide">কোম্পানি</h4>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-white/60 hover:text-[#1BA1E2] transition-colors">
+                  <a href={link.href} className="text-sm text-white/60 hover:text-[#1BA1E2] transition-colors leading-relaxed">
                     {link.label}
                   </a>
                 </li>
@@ -172,10 +239,10 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40 text-center sm:text-left">
+          <p className="text-xs text-white/40 text-center sm:text-left leading-relaxed">
             © ২০২৬ BANGLAR VOICE – বাংলার ভয়েস। সর্বস্বত্ব সংরক্ষিত।
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <a href="#" className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#1BA1E2] transition-colors" aria-label="Facebook">
               <Facebook className="w-4 h-4" />
             </a>

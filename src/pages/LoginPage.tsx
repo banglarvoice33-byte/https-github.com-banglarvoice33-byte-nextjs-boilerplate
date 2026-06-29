@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
-import { Mail, Lock, LogIn, ArrowLeft } from 'lucide-react'
+import { Mail, Lock, LogIn, ArrowLeft, Chrome } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export default function LoginPage() {
-  const { signIn } = useAuth()
+  const { signIn, signInWithOAuth } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,6 +39,16 @@ export default function LoginPage() {
     navigate('/ecosystem', { replace: true })
   }
 
+  const handleGoogleSignIn = async () => {
+    setError(null)
+    setIsGoogleLoading(true)
+    const { error: oauthError } = await signInWithOAuth()
+    setIsGoogleLoading(false)
+    if (oauthError) {
+      setError(oauthError.message || 'Google sign-in failed')
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f4f6fb] px-4 py-12">
       <div className="w-full max-w-md">
@@ -61,6 +72,37 @@ export default function LoginPage() {
               BANGLAR VOICE
             </h1>
             <p className="text-sm text-muted-foreground mt-1">বাংলার ভয়েস</p>
+          </div>
+
+          {/* Google Sign In */}
+          <button
+            onClick={handleGoogleSignIn}
+            disabled={isGoogleLoading}
+            className={cn(
+              'w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg',
+              'bg-white border border-border text-foreground text-sm font-semibold',
+              'hover:bg-gray-50 transition-colors',
+              'disabled:opacity-60 disabled:cursor-not-allowed'
+            )}
+          >
+            {isGoogleLoading ? (
+              <span className="w-4 h-4 border-2 border-[#2E4CB2] border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <>
+                <Chrome className="w-4 h-4 text-[#4285F4]" />
+                Google দিয়ে লগ ইন করুন
+              </>
+            )}
+          </button>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-border" />
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-white px-3 text-muted-foreground">অথবা</span>
+            </div>
           </div>
 
           {/* Form */}

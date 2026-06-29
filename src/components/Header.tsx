@@ -101,7 +101,7 @@ export default function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               className="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-primary/5 text-foreground hover:text-[#2E4CB2] transition-all"
