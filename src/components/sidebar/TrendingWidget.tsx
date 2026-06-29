@@ -1,11 +1,11 @@
 import { TrendingUp, Flame } from 'lucide-react'
 
 const trendingItems = [
-  { id: 1, title: 'বিশ্বকাপে বাংলাদেশের সেমিফাইনালে ওঠার সম্ভাবনা', views: '১৫.২K' },
-  { id: 2, title: 'ঢাকা-কক্সবাজার বুলেট ট্রেন প্রকল্প অনুমোদন', views: '১২.৮K' },
-  { id: 3, title: 'নতুন শিক্ষানীতি অনুমোদন', views: '৯.৫K' },
-  { id: 4, title: 'জ্বালানি তেলের দাম কমলো', views: '৮.১K' },
-  { id: 5, title: 'বাংলাদেশ আইটি এক্সপো শুরু', views: '৭.৩K' },
+  { id: 't1', title: 'বিশ্বকাপে বাংলাদেশের সেমিফাইনালে ওঠার সম্ভাবনা', views: '১৫.২K' },
+  { id: 't2', title: 'সুন্দরবনে বাঘ সংরক্ষণে নতুন উদ্যোগ', views: '১২.৮K' },
+  { id: 't3', title: 'নতুন ডিজিটাল ব্যাংকিং প্ল্যাটফর্ম লঞ্চ', views: '৯.৫K' },
+  { id: 't4', title: 'জ্বালানি তেলের দাম কমলো', views: '৮.১K' },
+  { id: 't5', title: 'ঢাকা আন্তর্জাতিক বইমেলা শুরু', views: '৭.৩K' },
 ]
 
 export default function TrendingWidget() {
